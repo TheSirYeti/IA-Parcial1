@@ -50,22 +50,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fleeTarget: {fileID: 0}
   seekTarget: {fileID: 0}
-  maxSpeed: 5
+  maxSpeed: 8
   maxForce: 0.1
-  minFleeDistance: 3
-  minSeekDistance: 6
-  viewDistance: 5
-  separationDistance: 2
-  futureTime: 3
-  futurePosObject: {fileID: 0}
-  arriveRadius: 2.5
-  eatRadius: 0.03
+  viewDistance: 6
+  separationDistance: 3
+  arriveRadius: 12
+  eatRadius: 2
   evadeRadius: 8
-  seekWeightValue: 2
-  fleeWeightValue: 5
-  separationWeightValue: 2
-  alignWeightValue: 2
-  cohesionWeightValue: 2
+  separationWeightValue: 3
+  alignWeightValue: 3
+  cohesionWeightValue: 3
   mapXbounds: 26
   mapZbounds: 15
 --- !u!1 &1738304641610033388
