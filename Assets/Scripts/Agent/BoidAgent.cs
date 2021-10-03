@@ -19,12 +19,16 @@ public class BoidAgent : MonoBehaviour
     public float viewDistance;
     public float separationDistance;
     
-    [Header("Pursuit | Evade")]
+    [Header("Future")]
     public float futureTime;
     public GameObject futurePosObject;
 
     [Header("Arrive")]
     public float arriveRadius;
+    public float eatRadius;
+    
+    [Header("Evade")]
+    public float evadeRadius;
 
     [Header("Weights")]
     public float seekWeightValue;
@@ -56,18 +60,9 @@ public class BoidAgent : MonoBehaviour
 
     void TakeAction()
     {
-        if (Vector3.Distance(transform.position, fleeTarget.transform.position) < minFleeDistance)
-        {
-            ApplyForce(Flee(fleeTarget) * fleeWeightValue);
-        }
-        else if (Vector3.Distance(transform.position, fleeTarget.transform.position) < minSeekDistance)
-        {
-            ApplyForce(Seek(seekTarget) * seekWeightValue);
-        }
-        else
-        {
-            ApplyForce(Separation() * separationWeightValue + Align() * alignWeightValue + Cohesion() * cohesionWeightValue);
-        }
+        ApplyForce(Separation() * separationWeightValue + Align() * alignWeightValue + Cohesion() * cohesionWeightValue);
+        Arrive();
+        Evade();
     }
 
     
@@ -99,25 +94,30 @@ public class BoidAgent : MonoBehaviour
 
     void Arrive()
     {
-
-        Vector3 desired = fleeTarget.transform.position - transform.position;
-
-        if (desired.magnitude < arriveRadius)
+        if (seekTarget != null)
         {
-            float speed = maxSpeed * (desired.magnitude / arriveRadius);
-            desired.Normalize();
-            desired *= speed;
-        }
-        else
-        {
-            desired.Normalize();
-            desired *= maxSpeed;
-        }
+            Vector3 desired = seekTarget.transform.position - transform.position;
+            if (desired.magnitude < arriveRadius)
+            {
+                if (desired.magnitude < arriveRadius)
+                {
+                    EventManager.Trigger("DisablePreviousFood");
+                }
+                float speed = maxSpeed * (desired.magnitude / arriveRadius);
+                desired.Normalize();
+                desired *= speed;
+            }
+            else
+            {
+                desired.Normalize();
+                desired *= maxSpeed;
+            }
 
-        Vector3 steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, maxForce);
+            Vector3 steering = desired - _velocity;
+            steering = Vector3.ClampMagnitude(steering, maxForce);
 
-        ApplyForce(steering);
+            ApplyForce(steering);
+        }
     }
 
     void Pursuit()
@@ -147,9 +147,9 @@ public class BoidAgent : MonoBehaviour
 
     void Evade()
     {
-        SeekingAgent tarAgent = fleeTarget.GetComponent<SeekingAgent>();
-        if (tarAgent == null) return;
-        Vector3 futurePos = fleeTarget.transform.position + tarAgent.GetVelocity() * futureTime;// * Time.deltaTime;
+        SeekingAgent seekingAgent = fleeTarget.GetComponent<SeekingAgent>();
+        if (seekingAgent == null) return;
+        Vector3 futurePos = fleeTarget.transform.position + seekingAgent.GetVelocity() * futureTime;// * Time.deltaTime;
         futurePosObject.transform.position = futurePos;
 
         Vector3 desired = futurePos - transform.position;

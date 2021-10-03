@@ -18,10 +18,10 @@ public class SeekingAgent : MonoBehaviour
 
     void Update()
     {
-        Seek();
+        //Seek();
 
-        transform.position += _velocity * Time.deltaTime;
-        transform.forward = _velocity.normalized;
+        //transform.position += _velocity * Time.deltaTime;
+        //transform.forward = _velocity.normalized;
     }
 
 
