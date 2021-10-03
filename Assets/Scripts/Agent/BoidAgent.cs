@@ -61,8 +61,9 @@ public class BoidAgent : MonoBehaviour
     void TakeAction()
     {
         ApplyForce(Separation() * separationWeightValue + Align() * alignWeightValue + Cohesion() * cohesionWeightValue);
-        Arrive();
+        if(Vector3.Distance(fleeTarget.transform.position, transform.position) < minFleeDistance)
         Evade();
+        Arrive();
     }
 
     
@@ -78,6 +79,7 @@ public class BoidAgent : MonoBehaviour
 
         return steering;
     }
+    
 
     Vector3 Flee(GameObject hunter)
     {
@@ -149,13 +151,13 @@ public class BoidAgent : MonoBehaviour
     {
         SeekingAgent seekingAgent = fleeTarget.GetComponent<SeekingAgent>();
         if (seekingAgent == null) return;
-        Vector3 futurePos = fleeTarget.transform.position + seekingAgent.GetVelocity() * futureTime;// * Time.deltaTime;
+        Vector3 futurePos = fleeTarget.transform.position + seekingAgent.GetVelocity() * futureTime * Time.fixedDeltaTime;
         futurePosObject.transform.position = futurePos;
 
-        Vector3 desired = futurePos - transform.position;
+        Vector3 desired = fleeTarget.transform.position  - transform.position;
         desired.Normalize();
         desired *= maxSpeed;
-        desired = -desired;
+        desired *= -1;
 
         Vector3 steering = desired - _velocity;
         steering = Vector3.ClampMagnitude(steering, maxForce);
