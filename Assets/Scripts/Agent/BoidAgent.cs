@@ -60,38 +60,11 @@ public class BoidAgent : MonoBehaviour
 
     void TakeAction()
     {
-        ApplyForce(Separation() * separationWeightValue + Align() * alignWeightValue + Cohesion() * cohesionWeightValue);
         if(Vector3.Distance(fleeTarget.transform.position, transform.position) < minFleeDistance)
-        Evade();
-        Arrive();
-    }
-
-    
-    Vector3 Seek(GameObject seeked)
-    {
-
-        Vector3 desired = seeked.transform.position - transform.position;
-        desired.Normalize();
-        desired *= maxSpeed;
-
-        Vector3 steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, maxForce);
-
-        return steering;
-    }
-    
-
-    Vector3 Flee(GameObject hunter)
-    {
-        Vector3 desired = hunter.transform.position - transform.position;
-        desired.Normalize();
-        desired *= maxSpeed;
-        desired *= -1;
-
-        Vector3 steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, maxForce);
-
-        return (steering);
+            Evade();
+        else if(seekTarget != null && Vector3.Distance(seekTarget.transform.position, transform.position) < minSeekDistance)
+            Arrive();
+        else ApplyForce(Separation() * separationWeightValue + Align() * alignWeightValue + Cohesion() * cohesionWeightValue);
     }
 
     void Arrive()
@@ -151,12 +124,12 @@ public class BoidAgent : MonoBehaviour
     {
         SeekingAgent seekingAgent = fleeTarget.GetComponent<SeekingAgent>();
         if (seekingAgent == null) return;
-        Vector3 futurePos = fleeTarget.transform.position + seekingAgent.GetVelocity() * futureTime * Time.fixedDeltaTime;
-        futurePosObject.transform.position = futurePos;
+        //Vector3 futurePos = fleeTarget.transform.position + seekingAgent.GetVelocity() * futureTime * Time.fixedDeltaTime;
+        //futurePosObject.transform.position = futurePos;
 
         Vector3 desired = fleeTarget.transform.position  - transform.position;
         desired.Normalize();
-        desired *= maxSpeed;
+        desired *= maxSpeed; 
         desired *= -1;
 
         Vector3 steering = desired - _velocity;
