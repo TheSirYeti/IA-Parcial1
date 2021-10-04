@@ -39,15 +39,15 @@ public class PatrolState : IState
 
             if (dir.magnitude < 0.1f)
             {
-                if (waypointDirection)
-                    _currentWaypoint++;
-                else _currentWaypoint--;
-
-                if (_currentWaypoint == _waypoints.Count)
+                if (_currentWaypoint == _waypoints.Count -1)
                     waypointDirection = false;
                 
                 if(_currentWaypoint == 0)
                     waypointDirection = true;
+                
+                if (waypointDirection)
+                    _currentWaypoint++;
+                else _currentWaypoint--;
             }
 
             _hunter.energy -= Time.fixedDeltaTime;
