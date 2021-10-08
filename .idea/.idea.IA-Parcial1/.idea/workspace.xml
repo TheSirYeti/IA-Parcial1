@@ -22,15 +22,12 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa22804.29905/SeekAgent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hunter/FSM/IState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hunter/FSM/IdleState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hunter/FSM/ChaseState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hunter/HunterBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa22804.47007/SeekAgent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Downloads/NpcAvoid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Hunter/FSM/PatrolState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa12736.18593/Agent.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1yxcdCQ4tApTEC9P8or2mU7F9om" />
   <component name="ProjectViewState">
@@ -92,6 +89,9 @@
       <workItem from="1633231668810" duration="4142000" />
       <workItem from="1633278906702" duration="1116000" />
       <workItem from="1633285036591" duration="16757000" />
+      <workItem from="1633308766072" duration="1025000" />
+      <workItem from="1633358479094" duration="421000" />
+      <workItem from="1633666021547" duration="365000" />
     </task>
     <servers />
   </component>

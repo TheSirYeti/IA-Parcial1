@@ -11,6 +11,8 @@ public class HunterBehaviour : MonoBehaviour
     public GameObject target;
     public float detectionRadius;
     public float killRadius;
+    public GameObject futurePosObject;
+    public float futureTime;
     
     [Header("Stats")]
     public float energy;

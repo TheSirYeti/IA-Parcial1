@@ -183,6 +183,11 @@ public class BoidAgent : MonoBehaviour
         _velocity += force;
         _velocity = Vector3.ClampMagnitude(_velocity, maxSpeed);
     }
+
+    public Vector3 GetVelocity()
+    {
+        return _velocity;
+    }
     
     void CheckMapBounds()
     {

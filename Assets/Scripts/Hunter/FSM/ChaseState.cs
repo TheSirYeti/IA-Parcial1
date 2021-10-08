@@ -37,6 +37,11 @@ public class ChaseState : IState
         
         else if (_hunter.energy > 0)
         {
+            BoidAgent tarAgent = _hunter.target.GetComponent<BoidAgent>();
+            if (tarAgent == null) return;
+            Vector3 futurePos = _hunter.target.transform.position + tarAgent.GetVelocity() * _hunter.futureTime;
+            _hunter.futurePosObject.transform.position = futurePos;
+            
             Vector3 desired = _hunter.target.transform.position - _hunter.transform.position;
             desired.Normalize();
             desired *= _hunter.speed;
